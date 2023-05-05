@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp2.TabbedDemo"
+            xmlns:local="clr-namespace:MAUI_Demo_Service.Models;assembly=MAUI-Demo-Service"
+            xmlns:mvvmView="clr-namespace:MAUI_Demo.MVVM.Views"
+             Title="TabbedDemo"
+            BarBackgroundColor="Navy"
+            BarTextColor="White"
+            SelectedTabColor="LightSkyBlue"
+            UnselectedTabColor="DarkSlateBlue">
+
+    <mvvmView:BookingsView></mvvmView:BookingsView>
+    <mvvmView:AddBookings></mvvmView:AddBookings>
+    <ContentPage Title="Tab 1" IconImageSource="add_favorite.svg">
+        
+        <CollectionView>
+            <CollectionView.ItemsSource>
+                <x:Array Type="{x:Type local:Bookings}">
+                    <local:Bookings Name="Steve"   Address="USA" />
+                    <local:Bookings Name="John"   Address="USA" />
+                    <local:Bookings Name="Tom"  Address="UK" />
+                    <local:Bookings Name="Lucas"   Address="Germany" />
+                    <local:Bookings Name="Tariq"   Address="UK" />
+                    <local:Bookings Name="Jane"   Address="USA" />
+                </x:Array>
+            </CollectionView.ItemsSource>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Label Text="{Binding Name}" FontAttributes="Bold" />
+                        <Label Grid.Column="1" Text="{Binding Address}" />
+                        <Label Grid.Column="2" Text="{Binding Address}"  HorizontalTextAlignment="End"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ContentPage>
+    <ContentPage Title="Tab 2" IconImageSource="add_friend.svg">
+        <Label Text="Tab 2 content"></Label>
+    </ContentPage>
+    <ContentPage Title="Tab 3" IconImageSource="add_image.svg">
+        <Label Text="Tab 3 content"></Label>
+    </ContentPage>
+</TabbedPage>

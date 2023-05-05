@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUI_Demo.MVVM.Views.AddBookings"
+             Title="AddBookings">
+    <VerticalStackLayout>
+        <Label 
+            Text="Please enter below details"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Entry x:Name="txtName"
+       Placeholder="Enter Name"/>
+        <Entry x:Name="txtAddress"
+       Placeholder="Enter Address" />
+        <Button Text="Add Bookings" x:Name="BtnAddBookings" Clicked="BtnAddBookings_Clicked"></Button>
+    </VerticalStackLayout>
+</ContentPage>
