@@ -6,7 +6,7 @@
              xmlns:local2="clr-namespace:MAUI_Demo.MVVM.Models"
              Title="BookingsView">
 
-    <ScrollView>
+    <StackLayout>
          
         <ListView x:Name="collectionId2">
             <ListView.ItemTemplate>
@@ -45,6 +45,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
-    </ScrollView>
+        <Button Text="Previous" x:Name="BtnPrevious" Clicked="BtnPrevious_Clicked"></Button>
+        <Button Text="Next" x:Name="BtnNext" Clicked="BtnNext_Clicked"></Button>
+    </StackLayout>
 </ContentPage>

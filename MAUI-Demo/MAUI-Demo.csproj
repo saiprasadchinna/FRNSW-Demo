@@ -63,6 +63,9 @@
 	  <MauiXaml Update="MVVM\Views\BookingsView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="OktaSignIn.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="TabbedDemo.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
