@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MAUI_Demo"
     xmlns:mvvmView="clr-namespace:MAUI_Demo.MVVM.Views"
-    Shell.FlyoutBehavior="Flyout">
+    Shell.FlyoutBehavior="Locked">
 
     <ShellContent
         Title="Home"
@@ -13,13 +13,18 @@
         Route="MainPage" />
 
     <ShellContent
-        Title="Fetch whether Data"
+        Title="Bookings View"
         ContentTemplate="{DataTemplate mvvmView:BookingsView}"
-        Route="MainPage" />
+        Route="BookingsView" />
 
     <ShellContent
-        Title="Booking History"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        Title="Tabbed Pages"
+        ContentTemplate="{DataTemplate local:TabbedDemo}"
+        Route="TabbedDemo" />
+    
+    <ShellContent
+        Title="Okta Sign-In"
+        ContentTemplate="{DataTemplate local:OktaSignIn}" 
+        Route="OktaSignIn" />
 
 </Shell>

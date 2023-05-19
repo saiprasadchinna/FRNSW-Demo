@@ -27,7 +27,12 @@
                 SemanticProperties.Description="Welcome to dot net Multi platform App U I"
                 FontSize="18"
                 HorizontalOptions="Center" />
+            <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
+                <Label Text="CollectionView Loading Sample" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+            </Frame>
+            <CollectionView x:Name="myCollectionView">
 
+            </CollectionView>
             <Button
                 x:Name="CounterBtn"
                 Text="Click me"
@@ -38,6 +43,17 @@
                 x:Name="GoBackTabbedPage"
                 Text="Go Back TabbedPage"
                 Clicked="GoBackTabbedPage_Clicked"
+                HorizontalOptions="Center" />
+            <Button
+                x:Name="EmployeeListPage"
+                Text="Go Back Employee List"
+                Clicked="EmployeeListPage_Clicked"
+                HorizontalOptions="Center" />
+
+            <Button
+                x:Name="BtnOktaLogin"
+                Text="Okta Login Screen"
+                Clicked="BtnOktaLogin_Clicked"
                 HorizontalOptions="Center" />
 
         </VerticalStackLayout>

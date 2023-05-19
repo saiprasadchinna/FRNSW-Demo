@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiApp2.TabbedDemo"
+             x:Class="MAUI_Demo.TabbedDemo"
             xmlns:local="clr-namespace:MAUI_Demo_Service.Models;assembly=MAUI-Demo-Service"
             xmlns:mvvmView="clr-namespace:MAUI_Demo.MVVM.Views"
              Title="TabbedDemo"
@@ -9,6 +9,7 @@
             BarTextColor="White"
             SelectedTabColor="LightSkyBlue"
             UnselectedTabColor="DarkSlateBlue">
+    
 
     <mvvmView:BookingsView></mvvmView:BookingsView>
     <mvvmView:AddBookings></mvvmView:AddBookings>
@@ -39,7 +40,8 @@
     <ContentPage Title="Tab 2" IconImageSource="add_friend.svg">
         <Label Text="Tab 2 content"></Label>
     </ContentPage>
-    <ContentPage Title="Tab 3" IconImageSource="add_image.svg">
-        <Label Text="Tab 3 content"></Label>
+    <ContentPage Title="Tab 3" IconImageSource="add_image.svg" >
+        <Label Text="Tab 3 content" TextColor="red"></Label>
+
     </ContentPage>
 </TabbedPage>

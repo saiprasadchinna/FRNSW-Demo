@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Text.Json;
 
 namespace MAUI_Demo_Service.Services;
-internal class RestService
+public class RestService
 {
     HttpClient _client;
     JsonSerializerOptions _serializerOptions;
@@ -97,6 +97,27 @@ internal class RestService
             {
                 string content = await response.Content.ReadAsStringAsync();
                 Items = JsonSerializer.Deserialize<List<WeatherForecast>>(content, _serializerOptions);
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(@"\tERROR {0}", ex.Message);
+        }
+
+        return Items;
+    }
+    public async Task<List<Employee>> GetEmployeeDetails()
+    {
+        List<Employee> Items = new List<Employee>();
+
+        Uri uri = new Uri(string.Format("https://hub.dummyapis.com/employee?noofRecords=10&idStarts=1001", string.Empty));
+        try
+        {
+            HttpResponseMessage response = await _client.GetAsync(uri);
+            if (response.IsSuccessStatusCode)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                Items = JsonSerializer.Deserialize<List<Employee>>(content, _serializerOptions);
             }
         }
         catch (Exception ex)

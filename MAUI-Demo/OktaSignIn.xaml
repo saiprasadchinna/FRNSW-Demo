@@ -5,17 +5,65 @@
              Title="OktaSignIn">
     <ScrollView>
         <VerticalStackLayout>
-            <Button 
+            <StackLayout
+                x:Name="LoginView">
+                <Button 
                     x:Name="LoginBtn"
-                    Text="Okta Log In"
+                    Text="Log In"
                     SemanticProperties.Hint="Click to log in"
-                    Clicked="LoginBtn_Clicked"
+                    Clicked="OnLoginClicked"
                     HorizontalOptions="Center" />
-            <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-            <WebView x:Name="WebViewInstance" WidthRequest="600" HeightRequest="600"/>
+
+                <WebView x:Name="WebViewInstance" WidthRequest="600" HeightRequest="600" Navigating="WebViewInstance_Navigating"/>
+            </StackLayout>
+            <Button 
+                x:Name="BtnUserDetails"
+                Text="Get user Details Using Okta Token"
+                SemanticProperties.Hint="Click to log out"
+                Clicked="BtnUserDetails_Clicked"
+                HorizontalOptions="Center" />
+            <StackLayout
+                x:Name="HomeView"
+                IsVisible="false">
+
+                <Image
+                x:Name="UserPictureImg"
+                SemanticProperties.Description="User's picture"
+                HeightRequest="200"
+                HorizontalOptions="Center" />
+
+                <Label 
+                x:Name="UsernameLbl"
+                Text=""
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="User's name"
+                FontSize="18"
+                HorizontalOptions="Center" />
+                
+                <Button 
+                x:Name="OktaLogout"
+                Text="Okta Log Out"
+                SemanticProperties.Hint="Click to Okta log out"
+                Clicked="OnOktaLogoutClicked"
+                HorizontalOptions="Center" />
+
+                <Button 
+                x:Name="LogoutBtn"
+                Text="Log Out"
+                SemanticProperties.Hint="Click to log out"
+                Clicked="OnLogoutClicked"
+                HorizontalOptions="Center" />
+
+                <Button 
+                x:Name="LogoutBtnCustom"
+                Text="Custom Log Out"
+                SemanticProperties.Hint="Click to log out"
+                Clicked="OnLogoutCustomClicked"
+                HorizontalOptions="Center" />
+
+
+
+            </StackLayout>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

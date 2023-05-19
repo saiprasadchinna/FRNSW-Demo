@@ -28,5 +28,10 @@ namespace MAUI_Demo_Service.Data
         {
             return await service.DoOperationBookingDetails(type, id);
         }
+
+        public async Task<List<Employee>> GetEmployees()
+        {
+            return await service.GetEmployeeDetails();
+        }
     }
 }

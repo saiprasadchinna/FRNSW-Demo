@@ -88,7 +88,6 @@ public partial class BookingsView : ContentPage
         {
             BtnNext.IsEnabled = false;
         }
-
     }
 
     private void BtnPrevious_Clicked(object sender, EventArgs e)

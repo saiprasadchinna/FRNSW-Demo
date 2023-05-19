@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:MAUI_Demo.MVVM.ViewModels"
+             x:DataType="viewModel:EmployeeListViewModel"
+             xmlns:models="clr-namespace:MAUI_Demo_Service.Models;assembly=MAUI-Demo-Service"
+             x:Class="MAUI_Demo.MVVM.Views.EmployeeView"
+             Title="EmployeeView">
+ 
+    <StackLayout>
+        <!--<ActivityIndicator IsRunning="True" IsVisible="{Binding _isbusy}" HeightRequest="40" WidthRequest="40" HorizontalOptions="Center"></ActivityIndicator>-->
+        <!--<Button Text="Click" Command="{Binding BtnClickCommand}"/>-->
+        <!--<RefreshView IsRefreshing="{Binding IsBusy}"></RefreshView>-->
+        <CollectionView x:Name="clnEmployee" ItemsSource="{Binding employeeList}" VerticalOptions="FillAndExpand"   
+                        RemainingItemsThreshold="1"
+                  RemainingItemsThresholdReachedCommand="{Binding ReachedCommand}"
+                        >
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Employee">
+                    <StackLayout Padding="10">
+                        <Label Text="{Binding firstName}" FontSize="20" Style="{StaticResource labelGreenStyle}"></Label>
+                        <Label Text="{Binding lastName}" FontSize="20" Style="{StaticResource labelGreenStyle}"></Label>
+                        <Label Text="{Binding email}" FontSize="20" Style="{StaticResource labelGreenStyle}"></Label>
+
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <CollectionView x:Name="ItemListView"
+                  AutomationProperties.Name="Items"
+                  ItemsSource="{Binding Items}"
+                  RemainingItemsThreshold="{Binding RemainingItemsTreshold}"
+                  RemainingItemsThresholdReachedCommand="{Binding ItemTresholdReachedCommand}"
+                  ItemsUpdatingScrollMode="KeepScrollOffset"
+
+                  SelectionMode="Single" VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Always" >
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="viewModel:Item">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="105" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image Source="dotnet_bot.png"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Margin="5"
+                               HeightRequest="80"
+                               WidthRequest="80" />
+
+
+                        <Label Grid.Column="1"
+                               VerticalOptions="Center"
+                               Text="{Binding Name, FallbackValue='Name'}"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>
