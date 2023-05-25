@@ -2,6 +2,48 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MAUI_Demo.MainPage">
+    <MenuItem Text="testMenu">
+        
+    </MenuItem>
+    <ContentPage.MenuBarItems >
+        <MenuBarItem Text="File" x:Name="menu">
+            <MenuFlyoutItem Text="Exit"
+                            Command="{Binding ExitCommand}" />
+        </MenuBarItem>
+        <MenuBarItem Text="Locations">
+            <MenuFlyoutSubItem Text="Change Location">
+                <MenuFlyoutItem Text="Redmond, USA"
+                                Command="{Binding ChangeLocationCommand}"
+                                CommandParameter="Redmond" />
+                <MenuFlyoutItem Text="London, UK"
+                                Command="{Binding ChangeLocationCommand}"
+                                CommandParameter="London" />
+                <MenuFlyoutItem Text="Berlin, DE"
+                                Command="{Binding ChangeLocationCommand}"
+                                CommandParameter="Berlin"/>
+            </MenuFlyoutSubItem>
+            <MenuFlyoutSeparator />
+            <MenuFlyoutItem Text="Add Location"
+                            Command="{Binding AddLocationCommand}" />
+            <MenuFlyoutItem Text="Edit Location"
+                            Command="{Binding EditLocationCommand}" />
+            <MenuFlyoutItem Text="Remove Location"
+                            Command="{Binding RemoveLocationCommand}" />
+        </MenuBarItem>
+        <MenuBarItem Text="View">
+            <MenuFlyoutItem Text="Refresh"
+                            Command="{Binding RefreshCommand}" />
+            <MenuFlyoutItem Text="Change Theme"
+                            Command="{Binding ChangeThemeCommand}" />
+        </MenuBarItem>
+        <MenuBarItem Text="Admin Menu" x:Name="AdminMenuItems" IsEnabled="False">
+            <MenuFlyoutItem Text="Page Roles Mapping"  IsEnabled="False"
+                            Command="{Binding RefreshCommand}" />
+            <MenuFlyoutItem Text="User Roles Mapping"
+                            Command="{Binding RefreshCommand}" />
+        </MenuBarItem>
+       
+    </ContentPage.MenuBarItems>
 
     <ScrollView>
         <VerticalStackLayout
@@ -16,38 +58,21 @@
                 HorizontalOptions="Center" />
 
             <Label
-                Text="Hello, World!"
+                Text="Hello, MAUI World!"
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="32"
                 HorizontalOptions="Center" />
 
             <Label
-                Text="Welcome to .NET Multi-platform App UI"
+                Text="Welcome to FRNSW Application"
                 SemanticProperties.HeadingLevel="Level2"
                 SemanticProperties.Description="Welcome to dot net Multi platform App U I"
                 FontSize="18"
-                HorizontalOptions="Center" />
-            <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-                <Label Text="CollectionView Loading Sample" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-            </Frame>
-            <CollectionView x:Name="myCollectionView">
-
-            </CollectionView>
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
                 HorizontalOptions="Center" />
             <Button
                 x:Name="GoBackTabbedPage"
                 Text="Go Back TabbedPage"
                 Clicked="GoBackTabbedPage_Clicked"
-                HorizontalOptions="Center" />
-            <Button
-                x:Name="EmployeeListPage"
-                Text="Go Back Employee List"
-                Clicked="EmployeeListPage_Clicked"
                 HorizontalOptions="Center" />
 
             <Button

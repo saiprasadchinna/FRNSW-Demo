@@ -16,58 +16,16 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
-        foreach (var s in GetItems(50))
-        {
-            myItems.Add(s);
-        }
-
-        myCollectionView.ItemsSource = myItems;
-        myCollectionView.RemainingItemsThreshold = 5;
-        myCollectionView.RemainingItemsThresholdReached += MyCollectionView_RemainingItemsThresholdReached;
+        AdminMenuItems.IsEnabled = true;
     }
-    private void MyCollectionView_RemainingItemsThresholdReached(object sender, EventArgs e)
-    {
-        foreach (var s in GetItems(15))
-        {
-            myItems.Add(s);
-        }
-    }
-    private List<string> GetItems(int numberOfItems)
-    {
-        var resultList = new List<string>();
-
-        for (var i = 0; i <= numberOfItems; i++)
-        {
-            resultList.Add(randomizer.Next(10000, 99999).ToString());
-        }
-
-        return resultList;
-    }
-
-    private void OnCounterClicked(object sender, EventArgs e)
-    {
-        count++;
-
-        if (count == 1)
-            CounterBtn.Text = $"Clicked {count} time";
-        else
-            CounterBtn.Text = $"Clicked {count} times";
-
-        SemanticScreenReader.Announce(CounterBtn.Text);
-    }
+ 
 
     private void GoBackTabbedPage_Clicked(object sender, EventArgs e)
     {
         Navigation.PushAsync(new TabbedDemo());
     }
 
-    private void EmployeeListPage_Clicked(object sender, EventArgs e)
-    {
-        var bookingService = new BookingService();
-        var listviewmodel = new EmployeeListViewModel(bookingService);
-        Navigation.PushModalAsync(new EmployeeView(listviewmodel));
-    }
-
+ 
     private void BtnOktaLogin_Clicked(object sender, EventArgs e)
     {
         Auth0Client authclient= new Auth0Client(new()
@@ -83,7 +41,7 @@ public partial class MainPage : ContentPage
 #endif
         });
 
-        Navigation.PushModalAsync(new OktaSignIn(authclient, new HttpClient()));
+        Navigation.PushAsync(new OktaSignIn(authclient, new HttpClient()));
     }
 }
 

@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAUI-Demo-Service", "MAUI-D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAUI-Demo", "MAUI-Demo\MAUI-Demo.csproj", "{D3E0FED3-EA5F-43E0-BD56-3981A5C4DF3D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI_BackOffice", "WebAPI_BackOffice\WebAPI_BackOffice\WebAPI_BackOffice.csproj", "{AA0CEFBA-072E-46F9-8898-7348E74F2347}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAUI-Blazor-Demo", "MAUI-Blazor-Demo\MAUI-Blazor-Demo.csproj", "{59123479-362B-468B-8DE6-645B30AFDD49}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAUI-Blazor-Demo", "MAUI-Blazor-Demo\MAUI-Blazor-Demo.csproj", "{8CEA9B4F-1243-4400-9F99-9F0109B75983}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI_BackOffice", "WebAPI_BackOffice\WebAPI_BackOffice.csproj", "{32348979-B155-445F-9782-FC0EBEBC6967}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,16 +27,15 @@ Global
 		{D3E0FED3-EA5F-43E0-BD56-3981A5C4DF3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3E0FED3-EA5F-43E0-BD56-3981A5C4DF3D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D3E0FED3-EA5F-43E0-BD56-3981A5C4DF3D}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{AA0CEFBA-072E-46F9-8898-7348E74F2347}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AA0CEFBA-072E-46F9-8898-7348E74F2347}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AA0CEFBA-072E-46F9-8898-7348E74F2347}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AA0CEFBA-072E-46F9-8898-7348E74F2347}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8CEA9B4F-1243-4400-9F99-9F0109B75983}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8CEA9B4F-1243-4400-9F99-9F0109B75983}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8CEA9B4F-1243-4400-9F99-9F0109B75983}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{8CEA9B4F-1243-4400-9F99-9F0109B75983}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8CEA9B4F-1243-4400-9F99-9F0109B75983}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8CEA9B4F-1243-4400-9F99-9F0109B75983}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{59123479-362B-468B-8DE6-645B30AFDD49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59123479-362B-468B-8DE6-645B30AFDD49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59123479-362B-468B-8DE6-645B30AFDD49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59123479-362B-468B-8DE6-645B30AFDD49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59123479-362B-468B-8DE6-645B30AFDD49}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{32348979-B155-445F-9782-FC0EBEBC6967}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32348979-B155-445F-9782-FC0EBEBC6967}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32348979-B155-445F-9782-FC0EBEBC6967}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32348979-B155-445F-9782-FC0EBEBC6967}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

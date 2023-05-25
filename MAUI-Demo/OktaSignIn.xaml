@@ -40,19 +40,6 @@
                 FontSize="18"
                 HorizontalOptions="Center" />
                 
-                <Button 
-                x:Name="OktaLogout"
-                Text="Okta Log Out"
-                SemanticProperties.Hint="Click to Okta log out"
-                Clicked="OnOktaLogoutClicked"
-                HorizontalOptions="Center" />
-
-                <Button 
-                x:Name="LogoutBtn"
-                Text="Log Out"
-                SemanticProperties.Hint="Click to log out"
-                Clicked="OnLogoutClicked"
-                HorizontalOptions="Center" />
 
                 <Button 
                 x:Name="LogoutBtnCustom"

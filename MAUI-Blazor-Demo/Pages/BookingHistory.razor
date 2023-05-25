@@ -1,0 +1,97 @@
+﻿@page "/bookingHistory" 
+@using MAUI_Demo_Service.Data;
+@using MAUI_Demo_Service.Models;
+
+@inject BookingService bookingService
+
+@if (bookingItems == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h3>BookingHistory</h3>
+    <table class="table">
+        <tr>
+            <td>Name</td>
+            <td>
+                <input type="text" name="Name" id="txtName" @bind="@name" @oninput="@((e) => { name=(string)e.Value;})" />
+
+            </td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td>
+                <input type="text" name="Country" id="txtCountry" @bind="@address" @oninput="@((e) => { address=(string)e.Value;})" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type='button' id='btnAdd' @onclick="AddRequest">Add</button>
+            </td>
+            <td>
+                <button type='button' id='btnClear' @onclick="clearFields">Clear</button>
+            </td>
+        </tr>
+    </table>
+    <table id="tblCustomers" class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var bookingItem in bookingItems)
+            {
+                <tr>
+                    <td>@bookingItem.Id</td>
+                    <td>@bookingItem.Name</td>
+                    <td>@bookingItem.Address</td>
+                    <td>@bookingItem.StatusMessage</td>
+                    <td>
+                        <button type='button' id='btnClear' @onclick="@(e => DoOperation(bookingItem.Id,"Delete"))">Delete</button>
+                        <button type='button' id='btnClear' @onclick="@(e => DoOperation(bookingItem.Id,"Reject"))">Reject</button>
+                        <button type='button' id='btnClear' @onclick="@(e => DoOperation(bookingItem.Id,"Confirm"))">Confirm</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@code {
+    private List<Bookings> bookingItems;
+    private string name { get; set; } = "";
+    private string address { get; set; } = "";
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        bookingItems = await bookingService.GetBookingDetailsAsyncFromAPI();
+    }
+
+    private async Task AddRequest()
+    {
+        bool status = await bookingService.AddBookingDetailsAsyncFromAPI(name, address);
+        if (status)
+        {
+            await OnInitializedAsync();
+        }
+    }
+    private async Task DoOperation(int id, string action)
+    {
+        bool status = await bookingService.DoOperationBookingDetailsAsyncFromAPI(action, id);
+        if (status)
+        {
+            await OnInitializedAsync();
+        }
+    }
+    private void clearFields()
+    {
+        name = "";
+        address = "";
+    }
+}

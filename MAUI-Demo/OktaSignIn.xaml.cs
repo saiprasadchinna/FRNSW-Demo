@@ -38,7 +38,8 @@ public partial class OktaSignIn : ContentPage
 
             TokenHolder.IdentityToken = loginResult.IdentityToken; //👈 removed code
             TokenHolder.AccessToken = loginResult.AccessToken; //👈 new code
-            TokenHolder.ReferenceToken = loginResult.RefreshToken; //👈 new code
+            //TokenHolder.ReferenceToken = loginResult.RefreshToken; //👈 new code
+            Navigation.PushAsync(new MainPage());
         }
         else
         {
@@ -46,37 +47,9 @@ public partial class OktaSignIn : ContentPage
         }
     }
 
-    private async void OnLogoutClicked(object sender, EventArgs e)
-    {
-        var logoutResult = await auth0Client.LogoutAsync();
+ 
 
-        if (!logoutResult.IsError)
-        {
-            HomeView.IsVisible = false;
-            LoginView.IsVisible = true;
-        }
-        else
-        {
-            await DisplayAlert("Error", logoutResult.ErrorDescription, "OK");
-        }
-    }
-
-    private async void OnOktaLogoutClicked(object sender, EventArgs e)
-    {
-        new App();
-        var logoutResult = await auth0Client.LogoutOktaAsync();
-
-        if (!logoutResult.IsError)
-        {
-            HomeView.IsVisible = false;
-            LoginView.IsVisible = true;
-        }
-        else
-        {
-            await DisplayAlert("Error", logoutResult.ErrorDescription, "OK");
-        }
-
-    }
+     
 
     private async void OnLogoutCustomClicked(object sender, EventArgs e)
     {
@@ -95,10 +68,12 @@ public partial class OktaSignIn : ContentPage
         {
             await DisplayAlert("Error", logoutResult.ErrorDescription, "OK");
         }
-
-        //#if WINDOWS
-        //        WebViewInstance.IsVisible = true;
-        //#endif
+        var filename = Process.GetCurrentProcess().MainModule.FileName;
+        // Start a new instance of the application
+       
+        Process.Start(filename);
+        Application.Current.Quit();
+        // Close the current process
     }
 
     private async void BtnUserDetails_Clicked(object sender, EventArgs e)
