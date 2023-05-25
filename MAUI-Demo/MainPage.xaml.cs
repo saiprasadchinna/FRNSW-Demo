@@ -16,7 +16,7 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
-        AdminMenuItems.IsEnabled = true;
+        //AdminMenuItems.IsEnabled = true;
     }
  
 

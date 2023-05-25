@@ -2,9 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MAUI_Demo.MainPage">
-    <MenuItem Text="testMenu">
-        
-    </MenuItem>
+ 
     <ContentPage.MenuBarItems >
         <MenuBarItem Text="File" x:Name="menu">
             <MenuFlyoutItem Text="Exit"
@@ -36,8 +34,8 @@
             <MenuFlyoutItem Text="Change Theme"
                             Command="{Binding ChangeThemeCommand}" />
         </MenuBarItem>
-        <MenuBarItem Text="Admin Menu" x:Name="AdminMenuItems" IsEnabled="False">
-            <MenuFlyoutItem Text="Page Roles Mapping"  IsEnabled="False"
+        <MenuBarItem Text="Admin Menu" x:Name="AdminMenuItems">
+            <MenuFlyoutItem Text="Page Roles Mapping"
                             Command="{Binding RefreshCommand}" />
             <MenuFlyoutItem Text="User Roles Mapping"
                             Command="{Binding RefreshCommand}" />
