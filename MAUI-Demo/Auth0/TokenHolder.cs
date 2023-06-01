@@ -11,5 +11,6 @@ namespace MAUI_Demo.Auth0
         public static string AccessToken { get; set; }
         public static string IdentityToken { get; set; }
         public static string ReferenceToken { get; set; }
+        public static string UserName { get; set; }
     }
 }

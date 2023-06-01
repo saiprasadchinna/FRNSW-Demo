@@ -1,6 +1,7 @@
 ﻿using MAUI_Demo.Auth0;
 using MAUI_Demo.MVVM.ViewModels;
 using MAUI_Demo.MVVM.Views;
+using MAUI_Demo.Views.Startup;
 using MAUI_Demo_Service.Data;
 using Microsoft.Extensions.Logging;
 
@@ -19,8 +20,9 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-		builder.Services.AddSingleton<BookingService>();
-		builder.Services.AddSingleton<EmployeeView>();
+        //Views
+        builder.Services.AddSingleton<LoginPage>();
+        builder.Services.AddSingleton<EmployeeView>();
 		builder.Services.AddSingleton<EmployeeListViewModel>();
 
         builder.Services.AddSingleton<OktaSignIn>();

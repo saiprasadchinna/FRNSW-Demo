@@ -1,4 +1,4 @@
-﻿using MAUI_Demo.Auth0;
+using MAUI_Demo.Auth0;
 using MAUI_Demo.RolePages;
 using MAUI_Demo_Service.Data;
 using MAUI_Demo_Service.Models;
@@ -6,17 +6,15 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
-namespace MAUI_Demo;
+namespace MAUI_Demo.Views.Startup;
 
-public partial class OktaSignIn : ContentPage
+public partial class LoginPage : ContentPage
 {
-    int count = 0;
     private readonly Auth0Client auth0Client;
     private readonly UserService _userService;
-    //private HttpClient _httpClient;
-    public OktaSignIn()
-    {
-        InitializeComponent();
+    public LoginPage()
+	{
+		InitializeComponent();
         auth0Client = new Auth0Client(new()
         {
             Domain = "dev-17683470.okta.com",
@@ -38,41 +36,44 @@ public partial class OktaSignIn : ContentPage
         auth0Client.Browser = new WebViewBrowserAuthenticator(WebViewInstance);
 #endif
     }
-
     private void OnLoginClicked(object sender, EventArgs e)
     {
-        loginUser();
-        //_userService.GetUserList();
-        //var rolePagesList = GetUserRolePages("saiprasad.thadem@pennywisesolutions.com");
+        loginUser(); 
     }
-
     public async void loginUser()
     {
-        //var loginResult = await auth0Client.LoginAsync();
+        var loginResult = await auth0Client.LoginAsync();
+        try
+        {
+            if (!loginResult.IsError)
+            {
+                await SecureStorage.Default.SetAsync("oauth_token", loginResult.IdentityToken);
+                UsernameLbl.Text = loginResult.User.Identity.Name;
+                UserPictureImg.Source = loginResult.User
+                  .Claims.FirstOrDefault(c => c.Type == "picture")?.Value;
 
-        //if (!loginResult.IsError)
-        //{
-        //    await SecureStorage.Default.SetAsync("oauth_token", loginResult.IdentityToken);
-        //    UsernameLbl.Text = loginResult.User.Identity.Name;
-        //    UserPictureImg.Source = loginResult.User
-        //      .Claims.FirstOrDefault(c => c.Type == "picture")?.Value;
+                LoginView.IsVisible = false;
+                HomeView.IsVisible = true;
 
-        //    LoginView.IsVisible = false;
-        //    HomeView.IsVisible = true;
+                //Validate Okta user exists in our Database or not if exists get the role pages.
+                string userEmail = loginResult.User.FindFirst("preferred_username").Value;
+                var userlist = await _userService.GetUserList();
+                var rolePagesList = await GetUserRolePages(userEmail);
 
-        //    //Validate Okta user exists in our Database or not if exists get the role pages.
-        //    string userEmail = loginResult.User.FindFirst("preferred_username").Value;
-        //var userlist = await _userService.GetUserList();
-        var rolePagesList = await GetUserRolePages("saiprasad.thadem@pennywisesolutions.com");
-        AddRoleMenus(rolePagesList);
-        //    TokenHolder.IdentityToken = loginResult.IdentityToken;
-        //    TokenHolder.AccessToken = loginResult.AccessToken;
-        //    TokenHolder.UserName = loginResult.User.Identity.Name;            
-        //}
-        //else
-        //{
-        //    await DisplayAlert("Error", loginResult.ErrorDescription, "OK");
-        //}
+                AddRoleMenus(rolePagesList);
+                TokenHolder.IdentityToken = loginResult.IdentityToken;
+                TokenHolder.AccessToken = loginResult.AccessToken;
+                TokenHolder.UserName = loginResult.User.Identity.Name;
+            }
+            else
+            {
+                await DisplayAlert("Error", loginResult.ErrorDescription, "OK");
+            }
+        }
+        catch (Exception ex)
+        {
+
+        }
     }
 
     public async Task<List<MAUI_Demo_Service.Models.UserRolePages>> GetUserRolePages(string email)
@@ -90,43 +91,48 @@ public partial class OktaSignIn : ContentPage
 
     public async void AddRoleMenus(List<UserRolePages> rolePagesList)
     {
-        var flyoutItem = new FlyoutItem()
+        try
         {
-            Title = "Dashboard Page",
-            Route = nameof(DashBoardPage),
-            FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems
-        };
-        foreach (var item in rolePagesList)
-        {
-            ShellContent content = new ShellContent();
-            content.Title = item.PageName;
-            content.FlyoutIcon = "dotnet_bot.svg";
-            Type t = Type.GetType("MAUI_Demo.RolePages." + item.PageName);
-            content.ContentTemplate = new DataTemplate(t);
-            flyoutItem.Items.Add(content);
-        }
+            var adminDashboardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(DashBoardPage)).FirstOrDefault();
+            if (adminDashboardInfo != null) AppShell.Current.Items.Remove(adminDashboardInfo);
 
-        if (!AppShell.Current.Items.Contains(flyoutItem))
-        {
-            AppShell.Current.Items.Add(flyoutItem);
-            if (DeviceInfo.Platform == DevicePlatform.WinUI)
+            var flyoutItem = new FlyoutItem()
             {
-                AppShell.Current.Dispatcher.Dispatch(async () =>
+                Title = "Dashboard Page",
+                Route = nameof(DashBoardPage),
+                FlyoutDisplayOptions = FlyoutDisplayOptions.AsMultipleItems
+            };
+            foreach (var item in rolePagesList)
+            {
+                ShellContent content = new ShellContent();
+                content.Title = item.PageName;
+                content.FlyoutIcon = "dotnet_bot.svg";
+                Type t = Type.GetType("MAUI_Demo.RolePages." + item.PageName);
+                content.ContentTemplate = new DataTemplate(t);
+                flyoutItem.Items.Add(content);
+            }
+
+            if (!AppShell.Current.Items.Contains(flyoutItem))
+            {
+                AppShell.Current.Items.Add(flyoutItem);
+                if (DeviceInfo.Platform == DevicePlatform.WinUI)
+                {
+                    AppShell.Current.Dispatcher.Dispatch(async () =>
+                    {
+                        await Shell.Current.GoToAsync($"//{nameof(DashBoardPage)}", true);
+                    });
+                }
+                else
                 {
                     await Shell.Current.GoToAsync($"//{nameof(DashBoardPage)}");
-                });
-            }
-            else
-            {
-                await Shell.Current.GoToAsync($"//{nameof(DashBoardPage)}");
+                }
             }
         }
+        catch(Exception ex)
+        {
+
+        }
     }
-
-
-
-
-
     public void OnLogoutCustomClicked(object sender, EventArgs e)
     {
         logoutUser();
@@ -162,7 +168,6 @@ public partial class OktaSignIn : ContentPage
         // Close the current process
     }
 
-
     private async void BtnUserDetails_Clicked(object sender, EventArgs e)
     {
         var results = await auth0Client.getUserInfo(TokenHolder.AccessToken);
@@ -184,7 +189,10 @@ public partial class OktaSignIn : ContentPage
                 await DisplayAlert("Error", ex.Message, "OK");
             }
         }
-
     }
 
+    protected override bool OnBackButtonPressed()
+    {
+        return true;
+    }
 }

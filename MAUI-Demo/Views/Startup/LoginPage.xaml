@@ -1,10 +1,40 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MAUI_Demo.OktaSignIn"
-             Title="OktaSignIn">
+             x:Class="MAUI_Demo.Views.Startup.LoginPage"
+             Shell.NavBarIsVisible="False"
+             NavigationPage.HasBackButton="false"
+             Title="LoginPage" 
+             Shell.FlyoutBehavior="Disabled">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="False" IsVisible="False"/>
+    </Shell.BackButtonBehavior>
+    
+
+
     <ScrollView>
-        <VerticalStackLayout>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="Center">
+            <Image
+                Source="dotnet_bot.png"
+                SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                HeightRequest="200"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="Welcome to FRNSW Application"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                FontSize="18"
+                HorizontalOptions="Center" />
+            <!--<Button
+                x:Name="GoBackTabbedPage"
+                Text="Go Back TabbedPage"
+                Clicked="GoBackTabbedPage_Clicked"
+                HorizontalOptions="Center" />-->
+
             <StackLayout
                 x:Name="LoginView">
                 <Button 
@@ -13,19 +43,19 @@
                     SemanticProperties.Hint="Click to log in"
                     Clicked="OnLoginClicked"
                     HorizontalOptions="Center" />
+                <!--<Button 
+                x:Name="BtnUserDetails"
+                Text="Get user Details Using Okta Token OR check whether user logout successfully or not."
+                SemanticProperties.Hint="Click to log out"
+                Clicked="BtnUserDetails_Clicked"
+                HorizontalOptions="Center" />-->
 
                 <WebView x:Name="WebViewInstance" WidthRequest="600" HeightRequest="600"/>
             </StackLayout>
-            <Button 
-                x:Name="BtnUserDetails"
-                Text="Get user Details Using Okta Token"
-                SemanticProperties.Hint="Click to log out"
-                Clicked="BtnUserDetails_Clicked"
-                HorizontalOptions="Center" />
+
             <StackLayout
                 x:Name="HomeView"
                 IsVisible="false">
-
                 <Image
                 x:Name="UserPictureImg"
                 SemanticProperties.Description="User's picture"
@@ -39,7 +69,7 @@
                 SemanticProperties.Description="User's name"
                 FontSize="18"
                 HorizontalOptions="Center" />
-                
+
 
                 <Button 
                 x:Name="LogoutBtnCustom"
@@ -47,10 +77,9 @@
                 SemanticProperties.Hint="Click to log out"
                 Clicked="OnLogoutCustomClicked"
                 HorizontalOptions="Center" />
-
-
-
             </StackLayout>
+
         </VerticalStackLayout>
     </ScrollView>
+
 </ContentPage>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUI_Demo.RolePages.PageList"
+             xmlns:viewModel="clr-namespace:MAUI_Demo.MVVM.ViewModels"
+              >
+    <!-- Add an item to the toolbar -->
+    <!--<Shell.TitleView>
+        <StackLayout>
+            
+        </StackLayout>
+    </Shell.TitleView>-->
+    
+    <StackLayout>
+        <Button Text="Add Page" x:Name="AddPage" HorizontalOptions="End" Clicked="AddPage_Clicked" ImageSource="{FontImage Glyph='+', Color=White, Size=22}"></Button>
+        <ListView x:Name="pagesListView" ItemsSource="{Binding pageList}" ItemTapped="OnListViewItemTapped" 
+                  ItemSelected="OnListViewItemSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="20" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="1"
+                           Text="{Binding PageName}"
+                           FontAttributes="Bold" />
+
+                            <Label Grid.Row="1"
+                           Grid.Column="1"
+                           Text="{Binding RoleName}"
+                           FontAttributes="Italic"/>
+
+
+                            <Button Grid.Row="2" Grid.Column="1" Text="Edit" x:Name="Delete" CommandParameter="{Binding PageId}"></Button>
+                            <Button Grid.Row="2" Grid.Column="2" Text="Remove User" x:Name="Reject" CommandParameter="{Binding PageId}"></Button>
+
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Text="Previous" x:Name="BtnPrevious" ></Button>
+        <Button Text="Next" x:Name="BtnNext" ></Button>
+    </StackLayout>
+</ContentPage>

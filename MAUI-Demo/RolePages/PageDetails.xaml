@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUI_Demo.RolePages.PageDetails"
+             Title="PageDetails">
+    <ScrollView>
+        <StackLayout Margin="20">
+            <Entry Text="{Binding PageName}" x:Name="PageNameEntry"
+                   HorizontalOptions="Center"
+                   Style="{DynamicResource TitleStyle}" />
+            
+            <Label Text="{Binding PageId}" IsVisible="false" x:Name="lblPageId" />
+            
+            <Label Text="{Binding RoleName, TargetNullValue={StaticResource locationUnknown}}"
+                   FontAttributes="Italic"
+                   HorizontalOptions="Center" />
+            <Picker Title="Select a Role" x:Name="rolePicker"
+        ItemsSource="{Binding RoleList}" ItemDisplayBinding="{Binding RoleName}" SelectedItem="{Binding RoleId}"
+          />
+
+            <Button x:Name="btnSave" Text="Save" Clicked="btnSave_Clicked"  HorizontalOptions="Start" BackgroundColor="Green"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

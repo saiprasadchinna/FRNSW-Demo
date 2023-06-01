@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUI_Demo.RolePages.UserDetailsPage"
+             xmlns:viewmodel="clr-namespace:MAUI_Demo.MVVM.ViewModels"
+             Title="User Details Page">
+    <ScrollView>
+        <StackLayout Margin="20">
+            <Entry Text="{Binding UserName}" x:Name="NameEntry"
+                   HorizontalOptions="Center"
+                   Style="{DynamicResource TitleStyle}" />
+            <Entry Text="{Binding Email, TargetNullValue={StaticResource locationUnknown}}" x:Name="EmailEntry"
+                   FontAttributes="Italic"
+                   HorizontalOptions="Center" />
+            <Entry Text="{Binding PhoneNumber, FallbackValue={StaticResource populationUnknown}}" x:Name="PhoneEntry"
+                   TextColor="Red"
+                   HorizontalOptions="Center" />
+            <Label Text="{Binding RoleName}"
+                   Style="{DynamicResource BodyStyle}" HorizontalOptions="Center"/>
+
+            <Label Text="{Binding UserId}" IsVisible="false" x:Name="lblUserId" />
+
+            <Picker Title="Select a Role" x:Name="rolePicker"
+        ItemsSource="{Binding RoleList}" ItemDisplayBinding="{Binding RoleName}" SelectedIndexChanged="OnPickerSelectedIndexChanged"  SelectedItem="{Binding RoleId}"
+          />
+            <Button x:Name="btnSave" Text="Save" Clicked="btnSave_Clicked"  HorizontalOptions="Start" BackgroundColor="Green"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

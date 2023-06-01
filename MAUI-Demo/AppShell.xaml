@@ -5,26 +5,23 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MAUI_Demo"
     xmlns:mvvmView="clr-namespace:MAUI_Demo.MVVM.Views"
-    Shell.FlyoutBehavior="Locked">
+    Shell.TabBarIsVisible="false"
+    xmlns:startupPages="clr-namespace:MAUI_Demo.Views.Startup" NavigationPage.HasBackButton="false">
 
-    <ShellContent
-        Title="Home"
+    <!--<ShellContent FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled"
+        Title="Main Page"
         ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        Route="MainPage" />-->
 
     <ShellContent
-        Title="Bookings View"
-        ContentTemplate="{DataTemplate mvvmView:BookingsView}"
-        Route="BookingsView" />
+        Title="Login Page" FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled"
+        ContentTemplate="{DataTemplate startupPages:LoginPage}"
+        Route="LoginPage" />
 
-    <ShellContent
-        Title="Tabbed Pages"
-        ContentTemplate="{DataTemplate local:TabbedDemo}"
-        Route="TabbedDemo" />
-    
-    <ShellContent
-        Title="Okta Sign-In"
-        ContentTemplate="{DataTemplate local:OktaSignIn}" 
-        Route="OktaSignIn" />
+    <Shell.FlyoutFooter>
+        <StackLayout Padding="20">
+            <Button Text="Sign Out" Clicked="Button_Clicked" />
+        </StackLayout>
+    </Shell.FlyoutFooter>
 
 </Shell>
