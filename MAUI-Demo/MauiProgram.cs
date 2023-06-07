@@ -58,6 +58,7 @@ public static class MauiProgram
             //MessageBox.Show(text: error.ExceptionObject.ToString(), caption: "Error");
         };
 
+
         return builder.Build();
 	}
 }
