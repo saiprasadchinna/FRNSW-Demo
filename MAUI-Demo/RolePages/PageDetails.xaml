@@ -10,8 +10,8 @@
                    Style="{DynamicResource TitleStyle}" />
             
             <Label Text="{Binding PageId}" IsVisible="false" x:Name="lblPageId" />
-            
-            <Label Text="{Binding RoleName, TargetNullValue={StaticResource locationUnknown}}"
+
+            <Label Text="{Binding RoleName, TargetNullValue={DynamicResource locationUnknown}}"
                    FontAttributes="Italic"
                    HorizontalOptions="Center" />
             <Picker Title="Select a Role" x:Name="rolePicker"

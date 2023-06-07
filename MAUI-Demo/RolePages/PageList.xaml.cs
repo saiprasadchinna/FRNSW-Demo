@@ -1,3 +1,4 @@
+using MAUI_Demo.Auth0;
 using MAUI_Demo.MVVM.ViewModels;
 using MAUI_Demo_Service.Data;
 using MAUI_Demo_Service.Models;
@@ -32,7 +33,7 @@ public partial class PageList : ContentPage, INotifyPropertyChanged
     public Task<List<MAUI_Demo_Service.Models.Role>> getRoleList()
     {
         UserService userService = new UserService();
-        return Task.Run(() => userService.GetRoleList());
+        return Task.Run(() => userService.GetRoleList(TokenHolder.AccessToken));
     }
 
     private void AddPage_Clicked(object sender, EventArgs e)

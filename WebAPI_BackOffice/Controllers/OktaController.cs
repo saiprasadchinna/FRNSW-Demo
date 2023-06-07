@@ -1,6 +1,8 @@
 ﻿using IdentityModel.OidcClient.Results;
 using MauiAuth0App.Auth0;
 using Microsoft.AspNetCore.Mvc;
+using WebAPI_BackOffice.DB;
+using WebAPI_BackOffice.Models;
 
 namespace WebAPI_BackOffice.Controllers
 {
@@ -8,16 +10,12 @@ namespace WebAPI_BackOffice.Controllers
     [Route("api/[controller]")]
     public class OktaController : Controller
     {
-        private readonly Auth0Client auth0Client;
-        public IActionResult Index()
-        {
-            return View();
-        }
 
-        private async Task<UserInfoResult> LogOutUser(string? accessToken)
+        [HttpGet("ValidateOktaTokenFromApp")]
+        [CustomAuthorize]
+        public ApiResponse validOktaToken()
         {
-            var results = await auth0Client.getUserInfo(accessToken);
-            return results;
+            return new ApiResponse("Successfully Validated Okta Token");
         }
     }
 }

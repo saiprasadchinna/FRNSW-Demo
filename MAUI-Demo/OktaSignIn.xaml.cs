@@ -1,4 +1,5 @@
-﻿using MAUI_Demo.Auth0;
+﻿using IdentityModel.OidcClient;
+using MAUI_Demo.Auth0;
 using MAUI_Demo.RolePages;
 using MAUI_Demo_Service.Data;
 using MAUI_Demo_Service.Models;
@@ -21,6 +22,7 @@ public partial class OktaSignIn : ContentPage
         {
             Domain = "dev-17683470.okta.com",
             ClientId = "0oa912ox83mA6vxCh5d7",
+            ClientSecret = "UWwSHKynb6mKQYNG8Wph3X962dvG5GDdZy1ty4ZG",
             Scope = "openid profile offline_access",
             Audience = "https://dev-17683470.okta.com",
 #if WINDOWS
@@ -63,7 +65,7 @@ public partial class OktaSignIn : ContentPage
         //    //Validate Okta user exists in our Database or not if exists get the role pages.
         //    string userEmail = loginResult.User.FindFirst("preferred_username").Value;
         //var userlist = await _userService.GetUserList();
-        var rolePagesList = await GetUserRolePages("saiprasad.thadem@pennywisesolutions.com");
+        var rolePagesList = await GetUserRolePages("saiprasad.thadem@pennywisesolutions.com", "");
         AddRoleMenus(rolePagesList);
         //    TokenHolder.IdentityToken = loginResult.IdentityToken;
         //    TokenHolder.AccessToken = loginResult.AccessToken;
@@ -75,12 +77,12 @@ public partial class OktaSignIn : ContentPage
         //}
     }
 
-    public async Task<List<MAUI_Demo_Service.Models.UserRolePages>> GetUserRolePages(string email)
+    public async Task<List<MAUI_Demo_Service.Models.UserRolePages>> GetUserRolePages(string email,string AccessToken)
     {
         List<MAUI_Demo_Service.Models.UserRolePages> userRolePageList = new List<MAUI_Demo_Service.Models.UserRolePages>();
         try
         {
-            userRolePageList = await _userService.GetUserRolePages(email);
+            userRolePageList = await _userService.GetUserRolePages(email, AccessToken);
         }
         catch (Exception ex)
         {

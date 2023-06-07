@@ -88,9 +88,9 @@ public partial class AppShell : Shell
     private void Button_Clicked(object sender, EventArgs e)
     {
         //logoutUser();
-        OktaSignIn obj = new OktaSignIn();
-        obj.OnLogoutCustomClicked(sender, e);
-        logoutOktaUserUsingToken();
+        //OktaSignIn obj = new OktaSignIn();
+        //obj.OnLogoutCustomClicked(sender, e);
+        //logoutOktaUserUsingToken();
         var filename = Process.GetCurrentProcess().MainModule.FileName;
         // Start a new instance of the application
 

@@ -1,4 +1,5 @@
-﻿using MAUI_Demo_Service.Data;
+﻿using MAUI_Demo.Auth0;
+using MAUI_Demo_Service.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace MAUI_Demo.MVVM.ViewModels
 
         public Task<List<MAUI_Demo_Service.Models.Page>> getPageList()
         {
-            return Task.Run(() => userService.GetPageList());
+            return Task.Run(() => userService.GetPageList(TokenHolder.AccessToken));
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using MAUI_Demo_Service.Data;
+﻿using MAUI_Demo.Auth0;
+using MAUI_Demo_Service.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,17 +17,17 @@ namespace MAUI_Demo.MVVM.ViewModels
 
         public AddPageViewModel()
         {
-            roleList = getRoleList().Result;
+            roleList = getRoleList(TokenHolder.AccessToken).Result;
         }
 
-        public Task<List<MAUI_Demo_Service.Models.Role>> getRoleList()
+        public Task<List<MAUI_Demo_Service.Models.Role>> getRoleList(string AccessToken)
         {
-            return Task.Run(() => userService.GetRoleList());
+            return Task.Run(() => userService.GetRoleList(AccessToken));
         }
 
-        public Task<bool> AddPages(string PageName, long RoleId, long PageId)
+        public Task<bool> AddPages(string PageName, long RoleId, long PageId, string AccessToken)
         {
-            return Task.Run(() => userService.AddPages(PageName, RoleId, PageId));
+            return Task.Run(() => userService.AddPages(PageName, RoleId, PageId, AccessToken));
         }
     }
 }

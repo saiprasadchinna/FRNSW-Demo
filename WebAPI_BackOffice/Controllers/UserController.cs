@@ -11,6 +11,7 @@ namespace WebAPI_BackOffice.Controllers
     {
         UserContext userDB = new UserContext();
         [HttpGet("getUserRolePages")]
+        [CustomAuthorize]
         public IEnumerable<UserRolePages> get_UserRolePages(string email)
         {
             DataTable dtResults = userDB.getUserRolePages(email);
@@ -18,6 +19,7 @@ namespace WebAPI_BackOffice.Controllers
             return userRolePageList;
         }
         [HttpGet("getRoleList")]
+        [CustomAuthorize]
         public IEnumerable<Role> get_RoleList()
         {
             DataTable dtResults = userDB.getRoleList();
@@ -26,6 +28,7 @@ namespace WebAPI_BackOffice.Controllers
         }
 
         [HttpGet("getUserList")]
+        [CustomAuthorize]
         public IEnumerable<User> get_UserList()
         {
             DataTable dtResults = userDB.getUserList();
@@ -34,6 +37,7 @@ namespace WebAPI_BackOffice.Controllers
         }
 
         [HttpGet("getPageList")]
+        [CustomAuthorize]
         public IEnumerable<Page> get_PageList()
         {
             DataTable dtResults = userDB.getPageList();
@@ -42,12 +46,14 @@ namespace WebAPI_BackOffice.Controllers
         }
 
 
-        [HttpGet("AddUsers")]
+        [HttpPost("AddUsers")]
+        [CustomAuthorize]
         public bool AddUsers(string Name, string Email, long PhoneNumber, long RoleId, long UserId)
         {
             return userDB.saveUsers(Name, Email, PhoneNumber, RoleId, UserId);
         }
-        [HttpGet("AddPages")]
+        [HttpPost("AddPages")]
+        [CustomAuthorize]
         public bool AddPages(string PageName, long RoleId, long PageId)
         {
             return userDB.savePages(PageName, RoleId, PageId);

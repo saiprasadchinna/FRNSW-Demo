@@ -1,17 +1,11 @@
-﻿using MAUI_Demo.MVVM.Views;
-using MAUI_Demo.RolePages;
+﻿using MAUI_Demo.Auth0;
 using MAUI_Demo_Service.Data;
-using Microsoft.Maui.Controls;
-using MvvmHelpers;
-using System.ComponentModel;
-using System.Windows.Input;
 
 namespace MAUI_Demo.MVVM.ViewModels
 {
     public class UserListViewModel
     {
         public IEnumerable<MAUI_Demo_Service.Models.User> userList { get; private set; } 
-
 
         UserService userService = new UserService();
 
@@ -27,7 +21,7 @@ namespace MAUI_Demo.MVVM.ViewModels
 
         public Task<List<MAUI_Demo_Service.Models.User>> getUserList()
         {
-            return Task.Run(() => userService.GetUserList());
+            return Task.Run(() => userService.GetUserList(TokenHolder.AccessToken));
         }
  
     }

@@ -1,3 +1,4 @@
+using MAUI_Demo.Auth0;
 using MAUI_Demo.MVVM.ViewModels;
 using MAUI_Demo_Service.Models;
 
@@ -16,7 +17,7 @@ public partial class AddUser : ContentPage
     private void btnSave_Clicked(object sender, EventArgs e)
     {
         var item = rolePicker.SelectedItem as Role;
-        bool status = objUserViewModel.AddUsers(NameEntry.Text, EmailEntry.Text, Convert.ToInt32(PhoneEntry.Text), item.RoleId,0).Result;
+        bool status = objUserViewModel.AddUsers(NameEntry.Text, EmailEntry.Text, Convert.ToInt32(PhoneEntry.Text), item.RoleId,0,TokenHolder.AccessToken).Result;
         if (status)
         {
             Navigation.PushAsync(new UserList());

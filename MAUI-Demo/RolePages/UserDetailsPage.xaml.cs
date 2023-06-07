@@ -1,3 +1,4 @@
+using MAUI_Demo.Auth0;
 using MAUI_Demo_Service.Data;
 using MAUI_Demo_Service.Models;
 
@@ -5,11 +6,11 @@ namespace MAUI_Demo.RolePages;
 
 public partial class UserDetailsPage : ContentPage
 {
-    
+
     public UserDetailsPage()
-	{
-		InitializeComponent();
-	}
+    {
+        InitializeComponent();
+    }
 
     private void btnSave_Clicked(object sender, EventArgs e)
     {
@@ -21,16 +22,16 @@ public partial class UserDetailsPage : ContentPage
         }
     }
 
-    public Task<bool> AddUsers(string Name, string Email, long PhoneNumber, long RoleId,long UserId)
+    public Task<bool> AddUsers(string Name, string Email, long PhoneNumber, long RoleId, long UserId)
     {
         UserService userService = new UserService();
-        return Task.Run(() => userService.AddUsers(Name, Email, PhoneNumber, RoleId, UserId));
+        return Task.Run(() => userService.AddUsers(Name, Email, PhoneNumber, RoleId, UserId, TokenHolder.AccessToken));
     }
     void OnPickerSelectedIndexChanged(object sender, EventArgs e)
     {
         var picker = (Picker)sender;
         int selectedIndex = picker.SelectedIndex;
-        
+
 
         if (selectedIndex != -1)
         {

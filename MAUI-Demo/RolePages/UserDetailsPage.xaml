@@ -9,10 +9,10 @@
             <Entry Text="{Binding UserName}" x:Name="NameEntry"
                    HorizontalOptions="Center"
                    Style="{DynamicResource TitleStyle}" />
-            <Entry Text="{Binding Email, TargetNullValue={StaticResource locationUnknown}}" x:Name="EmailEntry"
+            <Entry Text="{Binding Email, TargetNullValue={DynamicResource locationUnknown}}" x:Name="EmailEntry"
                    FontAttributes="Italic"
                    HorizontalOptions="Center" />
-            <Entry Text="{Binding PhoneNumber, FallbackValue={StaticResource populationUnknown}}" x:Name="PhoneEntry"
+            <Entry Text="{Binding PhoneNumber, FallbackValue={DynamicResource populationUnknown}}" x:Name="PhoneEntry"
                    TextColor="Red"
                    HorizontalOptions="Center" />
             <Label Text="{Binding RoleName}"

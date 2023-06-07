@@ -12,7 +12,7 @@
     </Shell.TitleView>-->
     <StackLayout>
         <Button Text="Add" x:Name="Add" HorizontalOptions="End" Clicked="Add_Clicked" ImageSource="{FontImage Glyph='+', Color=White, Size=22}"></Button>
-        <ListView x:Name="usersListView" ItemsSource="{Binding userList}" ItemTapped="OnListViewItemTapped" 
+        <ListView x:Name="usersListView" ItemsSource="{Binding userList}"  
                   ItemSelected="OnListViewItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>

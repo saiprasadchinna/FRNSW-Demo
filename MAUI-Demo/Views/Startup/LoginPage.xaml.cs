@@ -13,12 +13,13 @@ public partial class LoginPage : ContentPage
     private readonly Auth0Client auth0Client;
     private readonly UserService _userService;
     public LoginPage()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         auth0Client = new Auth0Client(new()
         {
             Domain = "dev-17683470.okta.com",
             ClientId = "0oa912ox83mA6vxCh5d7",
+            ClientSecret = "UWwSHKynb6mKQYNG8Wph3X962dvG5GDdZy1ty4ZG",
             Scope = "openid profile offline_access",
             Audience = "https://dev-17683470.okta.com",
 #if WINDOWS
@@ -38,7 +39,7 @@ public partial class LoginPage : ContentPage
     }
     private void OnLoginClicked(object sender, EventArgs e)
     {
-        loginUser(); 
+        loginUser();
     }
     public async void loginUser()
     {
@@ -52,18 +53,21 @@ public partial class LoginPage : ContentPage
                 UserPictureImg.Source = loginResult.User
                   .Claims.FirstOrDefault(c => c.Type == "picture")?.Value;
 
-                LoginView.IsVisible = false;
-                HomeView.IsVisible = true;
+
 
                 //Validate Okta user exists in our Database or not if exists get the role pages.
                 string userEmail = loginResult.User.FindFirst("preferred_username").Value;
-                var userlist = await _userService.GetUserList();
-                var rolePagesList = await GetUserRolePages(userEmail);
+                var userlist = await _userService.GetUserList(loginResult.AccessToken);
+                //var rolePagesList = await GetUserRolePages("saiprasad.thadem@pennywisesolutions.com");
+                var rolePagesList = await GetUserRolePages(userEmail, loginResult.AccessToken);
 
                 AddRoleMenus(rolePagesList);
                 TokenHolder.IdentityToken = loginResult.IdentityToken;
                 TokenHolder.AccessToken = loginResult.AccessToken;
                 TokenHolder.UserName = loginResult.User.Identity.Name;
+
+                LoginView.IsVisible = false;
+                HomeView.IsVisible = true;
             }
             else
             {
@@ -76,12 +80,12 @@ public partial class LoginPage : ContentPage
         }
     }
 
-    public async Task<List<MAUI_Demo_Service.Models.UserRolePages>> GetUserRolePages(string email)
+    public async Task<List<MAUI_Demo_Service.Models.UserRolePages>> GetUserRolePages(string email, string AccessToken)
     {
         List<MAUI_Demo_Service.Models.UserRolePages> userRolePageList = new List<MAUI_Demo_Service.Models.UserRolePages>();
         try
         {
-            userRolePageList = await _userService.GetUserRolePages(email);
+            userRolePageList = await _userService.GetUserRolePages(email, AccessToken);
         }
         catch (Exception ex)
         {
@@ -128,7 +132,7 @@ public partial class LoginPage : ContentPage
                 }
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
 
         }
@@ -194,5 +198,30 @@ public partial class LoginPage : ContentPage
     protected override bool OnBackButtonPressed()
     {
         return true;
+    }
+
+    private async void validOktaToken_Clicked(object sender, EventArgs e)
+    {
+        var results = await auth0Client.getUserInfo(TokenHolder.AccessToken);
+        using (var httpClient = new HttpClient())
+        {
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TokenHolder.AccessToken);
+
+            //string ApiUrl = "http://webapi.dev.local/api/Messages/defaultOktaTokenValid?accessToken=" + TokenHolder.AccessToken + "";
+            //httpClient.DefaultRequestHeaders.Authorization
+            //             = new AuthenticationHeaderValue("Bearer", TokenHolder.AccessToken);
+            try
+            {
+                HttpResponseMessage response = await httpClient.GetAsync("http://webapi.dev.local/api/Messages/protected");
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    await DisplayAlert("Info", content, "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
     }
 }

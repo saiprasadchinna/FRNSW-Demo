@@ -1,3 +1,4 @@
+using MAUI_Demo.Auth0;
 using MAUI_Demo_Service.Data;
 using MAUI_Demo_Service.Models;
 using Microsoft.Maui.Storage;
@@ -23,6 +24,6 @@ public partial class PageDetails : ContentPage
     public Task<bool> AddPages(string PageName, long RoleId, long PageId)
     {
         UserService userService = new UserService();
-        return Task.Run(() => userService.AddPages(PageName, RoleId, PageId));
+        return Task.Run(() => userService.AddPages(PageName, RoleId, PageId,TokenHolder.AccessToken));
     }
 }

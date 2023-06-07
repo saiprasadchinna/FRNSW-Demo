@@ -1,9 +1,9 @@
-using CommunityToolkit.Mvvm.Input;
+using MAUI_Demo.Auth0;
 using MAUI_Demo.MVVM.ViewModels;
 using MAUI_Demo_Service.Data;
 using MAUI_Demo_Service.Models;
 using System.ComponentModel;
-using System.Windows.Input;
+using System.Diagnostics;
 
 namespace MAUI_Demo.RolePages;
 
@@ -13,8 +13,7 @@ public partial class UserList : ContentPage, INotifyPropertyChanged
     public UserList()
     {
         InitializeComponent();
-        BindingContext = new UserListViewModel();
-        //usersListView.ItemsSource= new UserListViewModel().getUserList().Result;
+        BindingContext = new UserListViewModel(); 
     }
     public void OnListViewItemTapped(object sender, ItemTappedEventArgs e)
     {
@@ -24,20 +23,27 @@ public partial class UserList : ContentPage, INotifyPropertyChanged
 
     public async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
-        var userDetails = ((ListView)sender).SelectedItem as User;
-        if (userDetails != null)
+        try
         {
-            var page = new UserDetailsPage();
-            userDetails.RoleList= getRoleList().Result;
-            
-            page.BindingContext = userDetails;
-            await Navigation.PushAsync(page);
+            var userDetails = ((ListView)sender).SelectedItem as User;
+            if (userDetails != null)
+            {
+                var page = new UserDetailsPage();
+                userDetails.RoleList = getRoleList().Result;
+                page.BindingContext = userDetails;
+                await Navigation.PushAsync(page);
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", ex.Message, "OK");
+            Debug.WriteLine("customlog " + ex.Message);
         }
     }
     public Task<List<MAUI_Demo_Service.Models.Role>> getRoleList()
     {
         UserService userService = new UserService();
-        return Task.Run(() => userService.GetRoleList());
+        return Task.Run(() => userService.GetRoleList(TokenHolder.AccessToken));
     }
 
     private void Add_Clicked(object sender, EventArgs e)

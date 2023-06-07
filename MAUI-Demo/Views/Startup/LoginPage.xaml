@@ -43,12 +43,7 @@
                     SemanticProperties.Hint="Click to log in"
                     Clicked="OnLoginClicked"
                     HorizontalOptions="Center" />
-                <!--<Button 
-                x:Name="BtnUserDetails"
-                Text="Get user Details Using Okta Token OR check whether user logout successfully or not."
-                SemanticProperties.Hint="Click to log out"
-                Clicked="BtnUserDetails_Clicked"
-                HorizontalOptions="Center" />-->
+               
 
                 <WebView x:Name="WebViewInstance" WidthRequest="600" HeightRequest="600"/>
             </StackLayout>
@@ -76,6 +71,19 @@
                 Text="Custom Log Out"
                 SemanticProperties.Hint="Click to log out"
                 Clicked="OnLogoutCustomClicked"
+                HorizontalOptions="Center" />
+
+                <Button 
+                x:Name="BtnUserDetails"
+                Text="Get user Details Using Okta Token OR check whether user logout successfully or not."
+                SemanticProperties.Hint="Click to log out"
+                Clicked="BtnUserDetails_Clicked"
+                HorizontalOptions="Center" />
+
+                <Button 
+                x:Name="validOktaToken"
+                Text="Valid Okta Token" 
+                Clicked="validOktaToken_Clicked"
                 HorizontalOptions="Center" />
             </StackLayout>
 

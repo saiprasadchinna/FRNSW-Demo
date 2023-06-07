@@ -20,6 +20,7 @@ public class Auth0Client
         {
             Authority = $"https://{options.Domain}",
             ClientId = options.ClientId,
+            ClientSecret=options.ClientSecret,
             Scope = options.Scope,
             RedirectUri = options.RedirectUri,
             Browser = options.Browser
