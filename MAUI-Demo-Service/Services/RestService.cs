@@ -136,7 +136,7 @@ public class RestService
         List<UserRolePages> Items = new List<UserRolePages>();
 
         Uri uri = new Uri(string.Format("http://webapi.dev.local/api/User/getUserRolePages?email=" + email + "", string.Empty));
-        
+
         HttpContent htcontent = new FormUrlEncodedContent(
               new List<KeyValuePair<string, string>>()
               {
@@ -298,11 +298,11 @@ public class RestService
         return Items;
     }
 
-    public async Task<bool> AddPages(string Name, long RoleId, long PageId, string AccessToken)
+    public async Task<bool> AddPages(string Name, long RoleId, string RoleList, long PageId, string AccessToken)
     {
         bool Items = false;
 
-        Uri uri = new Uri(string.Format("http://webapi.dev.local/api/User/AddPages?PageName=" + Name + "&RoleId=" + RoleId + "&PageId=" + PageId + "", string.Empty));
+        Uri uri = new Uri(string.Format("http://webapi.dev.local/api/User/AddPages?PageName=" + Name + "&RoleId=" + RoleId + "&RoleList=" + RoleList + "&PageId=" + PageId + "", string.Empty));
         HttpContent htcontent = new FormUrlEncodedContent(
               new List<KeyValuePair<string, string>>()
               {

@@ -1,7 +1,7 @@
 ﻿using MAUI_Demo.Auth0;
 using MAUI_Demo_Service.Data;
 
-namespace MAUI_Demo.MVVM.ViewModels
+namespace MAUI_Demo.ViewModels
 {
     public class AddUserViewModel
     {

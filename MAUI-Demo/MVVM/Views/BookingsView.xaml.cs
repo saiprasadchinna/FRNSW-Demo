@@ -1,10 +1,30 @@
-using MAUI_Demo.MVVM.ViewModels;
+using MAUI_Demo.ViewModels;
+using System.ComponentModel;
 
 namespace MAUI_Demo.MVVM.Views;
 
 
-public partial class BookingsView : ContentPage
+public partial class BookingsView : ContentPage, INotifyPropertyChanged
 {
+
+    private bool _inlineButtonEnabled = false;
+
+
+    public bool InlineButtonEnabled
+    {
+        get
+        {
+            // breakpoint 1, which never hits with value = false
+            return _inlineButtonEnabled;
+        }
+        set
+        {
+            // breakpoint 2, which hits
+            _inlineButtonEnabled = value;
+            OnPropertyChanged(nameof(InlineButtonEnabled));
+        }
+    }
+
     BookingsViewModel viewModel = new BookingsViewModel();
 
     public IEnumerable<MAUI_Demo_Service.Models.Bookings> bookingsList = new List<MAUI_Demo_Service.Models.Bookings>();
@@ -19,7 +39,7 @@ public partial class BookingsView : ContentPage
         InitializeComponent();
         int[] items = { 1, 2, 3, 4, 5, 6, 7 };
         var a = items.Skip(2).Take(3);
-        BindingContext = new BookingsViewModel().GetBookingDetails().Result;
+        BindingContext = this;
         //bookingsList2 = ;
         collectionId2.ItemsSource = new BookingsViewModel().GetBookingDetails().Result.Skip((CurrentPage - 1) * DefaultLoad).Take(DefaultLoad);
         //skipItems = DefaultLoad;
@@ -113,5 +133,14 @@ public partial class BookingsView : ContentPage
                 BtnPrevious.IsEnabled = false;
             }
         }
+    }
+    private void InlineBtnPrevious_Clicked(object sender, EventArgs e)
+    {
+        InlineButtonEnabled = true;
+    }
+
+    private void InlineBtnNext_Clicked(object sender, EventArgs e)
+    {
+        InlineButtonEnabled = false;
     }
 }

@@ -1,5 +1,5 @@
 using MAUI_Demo.Auth0;
-using MAUI_Demo.MVVM.ViewModels;
+using MAUI_Demo.ViewModels;
 using MAUI_Demo_Service.Models;
 
 namespace MAUI_Demo.RolePages;
@@ -22,6 +22,10 @@ public partial class AddUser : ContentPage
         {
             Navigation.PushAsync(new UserList());
         }
-        
+        else
+        {
+            DisplayAlert("DB Side Error", "User already exists please give different email Id to add the user", "OK");
+        }
+
     }
 }

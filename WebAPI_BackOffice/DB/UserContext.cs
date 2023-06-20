@@ -61,14 +61,18 @@ namespace WebAPI_BackOffice.DB
                 cmd.Parameters.AddWithValue("@PhoneNumber", PhoneNumber);
                 cmd.Parameters.AddWithValue("@RoleId", RoleId);
                 cmd.Parameters.AddWithValue("@UserId", UserId);
+                //cmd.Parameters.Add("@UserExistsOrNot", SqlDbType.Bit);
+                //cmd.Parameters["@UserExistsOrNot"].Direction = ParameterDirection.Output;
                 int result = cmd.ExecuteNonQuery();
+                //var userexistsOrnot = Convert.ToString(cmd.Parameters["@UserExistsOrNot"].Value);
                 if (result > 0)
                     return true;
                 else
                     return false;
+
             }
         }
-        public bool savePages(string PageName, long RoleId, long PageId)
+        public bool savePages(string PageName, long RoleId,string RoleList, long PageId)
         {
             using (SqlConnection sqlConnection = new SqlConnection("Server=.;Database=FRNSWdemo;uid=sa;pwd=pnws@123;"))
             {
@@ -77,6 +81,7 @@ namespace WebAPI_BackOffice.DB
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@PageName", PageName);
                 cmd.Parameters.AddWithValue("@RoleId", RoleId);
+                cmd.Parameters.AddWithValue("@RoleList", RoleList);
                 cmd.Parameters.AddWithValue("@PageId", PageId);
                 int result = cmd.ExecuteNonQuery();
                 if (result > 0)

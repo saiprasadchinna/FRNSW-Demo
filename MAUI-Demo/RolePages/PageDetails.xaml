@@ -2,8 +2,66 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MAUI_Demo.RolePages.PageDetails"
-             Title="PageDetails">
+             xmlns:roleModel="clr-namespace:MAUI_Demo_Service.Models;assembly=MAUI-Demo-Service"
+             xmlns:viewModel="clr-namespace:MAUI_Demo.ViewModels"
+             x:DataType="viewModel:PageDetailsViewModel" 
+             Title="{Binding PageDetails.PageName}">
+
     <ScrollView>
+        <StackLayout Margin="20">
+
+            <Entry Text="{Binding PageDetails.PageName}" x:Name="PageNameEntry"
+                   HorizontalOptions="Center"
+                   Style="{DynamicResource TitleStyle}" />
+            <Label Text="{Binding PageDetails.PageId}" IsVisible="false" x:Name="lblPageId" />
+
+            <CollectionView ItemsSource="{Binding PageDetails.RoleList}" x:Name="roleCollection"
+                SelectionMode="Multiple"
+                SelectionChanged="roleCollection_SelectionChanged" SelectedItems="{Binding PageRole, Mode=TwoWay}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="roleModel:Role">
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding RoleId}" FontSize="20" Style="{StaticResource labelGreenStyle}"></Label>
+                            <Label Text="{Binding RoleName}" FontSize="20" Style="{StaticResource labelGreenStyle}"></Label>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroupList>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal" />
+                                        <VisualState x:Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="Yellow" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateGroupList>
+                            </VisualStateManager.VisualStateGroups>
+                        </StackLayout>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Button x:Name="btnSave" Text="Save" Clicked="btnSave_Clicked"  HorizontalOptions="Start" BackgroundColor="Green"/>
+        </StackLayout>
+    </ScrollView>
+    <!--xmlns:roleModel="clr-namespace:MAUI_Demo_Service.Models;assembly=MAUI-Demo-Service"-->
+    <!--<ContentPage.Resources>
+        <Style TargetType="CollectionView">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="LightSkyBlue" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>-->
+    <!--<ScrollView>
         <StackLayout Margin="20">
             <Entry Text="{Binding PageName}" x:Name="PageNameEntry"
                    HorizontalOptions="Center"
@@ -14,11 +72,47 @@
             <Label Text="{Binding RoleName, TargetNullValue={DynamicResource locationUnknown}}"
                    FontAttributes="Italic"
                    HorizontalOptions="Center" />
-            <Picker Title="Select a Role" x:Name="rolePicker"
+            -->
+    <!--<Picker Title="Select a Role" x:Name="rolePicker"
         ItemsSource="{Binding RoleList}" ItemDisplayBinding="{Binding RoleName}" SelectedItem="{Binding RoleId}"
-          />
+          />-->
+    <!--
+            <CollectionView ItemsSource="{Binding Page.RoleList}" x:Name="roleCollection"
+                SelectionMode="Multiple"
+                SelectionChanged="OnCollectionViewSelectionChanged" SelectedItem="{Binding Page.SelectedRole}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="roleModel:Role">
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding RoleId}" FontSize="20" Style="{StaticResource labelGreenStyle}"></Label>
+                            <Label Text="{Binding RoleName}" FontSize="20" Style="{StaticResource labelGreenStyle}"></Label>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroupList>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal" />
+                                        <VisualState x:Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="Yellow" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateGroupList>
+                            </VisualStateManager.VisualStateGroups>
+                        </StackLayout>
+                        
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-            <Button x:Name="btnSave" Text="Save" Clicked="btnSave_Clicked"  HorizontalOptions="Start" BackgroundColor="Green"/>
+
+            <Entry Text="{Binding Page.PageName}" x:Name="PageNameEntry2"
+                   HorizontalOptions="Center"
+                   Style="{DynamicResource TitleStyle}" />
+
+            <Label Text="{Binding Page.PageId}" IsVisible="false" x:Name="lblPageId2" />
+
+
+
+            
         </StackLayout>
-    </ScrollView>
+    </ScrollView>-->
 </ContentPage>

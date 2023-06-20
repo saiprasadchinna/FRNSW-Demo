@@ -13,6 +13,7 @@
 
     <mvvmView:BookingsView></mvvmView:BookingsView>
     <mvvmView:AddBookings></mvvmView:AddBookings>
+    <mvvmView:EmployeeView></mvvmView:EmployeeView>
     <ContentPage Title="Tab 1" IconImageSource="add_favorite.svg">
         
         <CollectionView>

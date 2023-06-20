@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MAUI_Demo.RolePages.UserList"
-             xmlns:viewModel="clr-namespace:MAUI_Demo.MVVM.ViewModels"
+             xmlns:viewModel="clr-namespace:MAUI_Demo.ViewModels"
               >
     <!-- Add an item to the toolbar -->
     <!--<Shell.TitleView>
@@ -10,9 +10,15 @@
             
         </StackLayout>
     </Shell.TitleView>-->
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="False" IsVisible="False"/>
+    </Shell.BackButtonBehavior>
+    <ContentPage.BindingContext>
+        <viewModel:UserListViewModel></viewModel:UserListViewModel>
+    </ContentPage.BindingContext>
     <StackLayout>
         <Button Text="Add" x:Name="Add" HorizontalOptions="End" Clicked="Add_Clicked" ImageSource="{FontImage Glyph='+', Color=White, Size=22}"></Button>
-        <ListView x:Name="usersListView" ItemsSource="{Binding userList}"  
+        <ListView x:Name="usersListView" ItemsSource="{Binding ObsUserList}"  
                   ItemSelected="OnListViewItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -49,17 +55,18 @@
                            Grid.Column="1"
                            Text="{Binding RoleName}"
                            FontAttributes="Italic" />
-                           
 
-                            <Button Grid.Row="4" Grid.Column="1" Text="Edit" x:Name="Delete" CommandParameter="{Binding UserId}"></Button>
-                            <Button Grid.Row="4" Grid.Column="2" Text="Remove User" x:Name="Reject" CommandParameter="{Binding UserId}"></Button>
-                           
+
+                            <!--<Button Grid.Row="4" Grid.Column="1" Text="Edit" x:Name="Edit" Clicked="Edit_Clicked"  CommandParameter="{Binding UserId}"></Button>-->
+                            <!--<Button Grid.Row="4" Grid.Column="2" Text="Remove User" x:Name="Reject" CommandParameter="{Binding UserId}"></Button>-->
+
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Text="Previous" x:Name="BtnPrevious" Command="{Binding PreviousCommand}" ></Button>
-        <Button Text="Next" x:Name="BtnNext" ></Button>
+        <Button Text="Previous" x:Name="BtnPrevious" Command="{Binding PreviousCommand}" IsEnabled="{Binding IsListActive}"></Button>
+        <Button Text="Next" x:Name="BtnNext"  Command="{Binding NextCommand}" IsEnabled="{Binding IsMonthActive}"></Button>
+        
     </StackLayout>
 </ContentPage>

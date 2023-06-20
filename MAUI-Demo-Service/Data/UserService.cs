@@ -7,7 +7,7 @@ namespace MAUI_Demo_Service.Data
     {
         RestService service = new RestService();
 
-        public async Task<List<UserRolePages>> GetUserRolePages(string email,string AccessToken)
+        public async Task<List<UserRolePages>> GetUserRolePages(string email, string AccessToken)
         {
             return await service.GetUserRolePages(email, AccessToken);
         }
@@ -23,13 +23,13 @@ namespace MAUI_Demo_Service.Data
         {
             return await service.GetPageList(AccessToken);
         }
-        public async Task<bool> AddUsers(string Name, string Email, long PhoneNumber, long RoleId, long UserId,string AccessToken)
+        public async Task<bool> AddUsers(string Name, string Email, long PhoneNumber, long RoleId, long UserId, string AccessToken)
         {
-            return await service.AddUsers(Name, Email, PhoneNumber, RoleId,UserId, AccessToken);
+            return await service.AddUsers(Name, Email, PhoneNumber, RoleId, UserId, AccessToken);
         }
-        public async Task<bool> AddPages(string PageName,  long RoleId, long PageId,string AccessToken)
+        public async Task<bool> AddPages(string PageName, long RoleId, string RoleList, long PageId, string AccessToken)
         {
-            return await service.AddPages(PageName, RoleId,PageId, AccessToken);
+            return await service.AddPages(PageName, RoleId, RoleList, PageId, AccessToken);
         }
         public async Task<bool> OktaRevokeAccessToken(string AccessToken)
         {

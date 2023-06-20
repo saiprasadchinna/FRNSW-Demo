@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MAUI_Demo.MVVM.ViewModels
+namespace MAUI_Demo.ViewModels
 {
     public class AddPageViewModel
     {
@@ -25,9 +25,9 @@ namespace MAUI_Demo.MVVM.ViewModels
             return Task.Run(() => userService.GetRoleList(AccessToken));
         }
 
-        public Task<bool> AddPages(string PageName, long RoleId, long PageId, string AccessToken)
+        public Task<bool> AddPages(string PageName, long RoleId, string RoleList, long PageId, string AccessToken)
         {
-            return Task.Run(() => userService.AddPages(PageName, RoleId, PageId, AccessToken));
+            return Task.Run(() => userService.AddPages(PageName, RoleId, RoleList, PageId, AccessToken));
         }
     }
 }
