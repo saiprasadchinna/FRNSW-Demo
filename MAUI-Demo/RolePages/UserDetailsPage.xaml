@@ -2,10 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MAUI_Demo.RolePages.UserDetailsPage"
-             xmlns:viewmodel="clr-namespace:MAUI_Demo.MVVM.ViewModels"
+             xmlns:viewmodel="clr-namespace:MAUI_Demo.ViewModels"
+             xmlns:roleModel="clr-namespace:MAUI_Demo_Service.Models;assembly=MAUI-Demo-Service"
              Title="User Details Page">
     <ScrollView>
         <StackLayout Margin="20">
+           
             <Entry Text="{Binding UserName}" x:Name="NameEntry"
                    HorizontalOptions="Center"
                    Style="{DynamicResource TitleStyle}" />
@@ -23,6 +25,18 @@
             <Picker Title="Select a Role" x:Name="rolePicker"
         ItemsSource="{Binding RoleList}" ItemDisplayBinding="{Binding RoleName}" SelectedIndexChanged="OnPickerSelectedIndexChanged"  SelectedItem="{Binding RoleId}"
           />
+            <CollectionView ItemsSource="{Binding RoleList}"
+                SelectionMode="Multiple"
+                SelectionChanged="CollectionView_SelectionChanged" SelectedItems="{Binding SelectedRole, Mode=TwoWay}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="roleModel:Role">
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding RoleId}" FontSize="20" Style="{StaticResource labelGreenStyle}"></Label>
+                            <Label Text="{Binding RoleName}" FontSize="20" Style="{StaticResource labelGreenStyle}"></Label>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
             <Button x:Name="btnSave" Text="Save" Clicked="btnSave_Clicked"  HorizontalOptions="Start" BackgroundColor="Green"/>
         </StackLayout>
     </ScrollView>

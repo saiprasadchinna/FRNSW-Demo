@@ -1,4 +1,5 @@
-using MAUI_Demo.MVVM.ViewModels;
+using MAUI_Demo.ViewModels;
+using MAUI_Demo_Service.Data;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -11,8 +12,10 @@ public partial class EmployeeView : ContentPage
     {
         public string Name { get; set; }
     }
-    public EmployeeView(EmployeeListViewModel viewmodel)
+    public EmployeeView()
     {
+        BookingService service = new BookingService();
+        EmployeeListViewModel viewmodel = new EmployeeListViewModel(service);
         InitializeComponent();
         ItemListView.RemainingItemsThreshold = 5;
         ItemListView.RemainingItemsThresholdReached += MyCollectionView_RemainingItemsThresholdReached;

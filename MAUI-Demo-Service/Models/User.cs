@@ -11,5 +11,6 @@
         public int PageId { get; set; }
         public string PageName { get; set; }
         public List<Role> RoleList { get; set; }
+        public List<Role> SelectedRole { get; set; }
     }
 }

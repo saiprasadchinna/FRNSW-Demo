@@ -7,5 +7,7 @@
 
         public int RoleId { get; set; }
         public string RoleName { get; set; }
+        public string RoleNames { get; set; }
+        public string RoleIDs { get; set; }
     }
 }

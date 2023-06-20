@@ -1,5 +1,5 @@
 using MAUI_Demo.Auth0;
-using MAUI_Demo.MVVM.ViewModels;
+using MAUI_Demo.ViewModels;
 using MAUI_Demo_Service.Data;
 using MAUI_Demo_Service.Models;
 using System.ComponentModel;
@@ -9,11 +9,10 @@ namespace MAUI_Demo.RolePages;
 
 public partial class UserList : ContentPage, INotifyPropertyChanged
 {
-   
     public UserList()
     {
         InitializeComponent();
-        BindingContext = new UserListViewModel(); 
+        //BindingContext = new UserListViewModel(); 
     }
     public void OnListViewItemTapped(object sender, ItemTappedEventArgs e)
     {
@@ -30,6 +29,7 @@ public partial class UserList : ContentPage, INotifyPropertyChanged
             {
                 var page = new UserDetailsPage();
                 userDetails.RoleList = getRoleList().Result;
+                userDetails.SelectedRole = getRoleList().Result;
                 page.BindingContext = userDetails;
                 await Navigation.PushAsync(page);
             }
@@ -49,5 +49,30 @@ public partial class UserList : ContentPage, INotifyPropertyChanged
     private void Add_Clicked(object sender, EventArgs e)
     {
         Navigation.PushAsync(new AddUser());
+    }
+
+    private async void Edit_Clicked(object sender, EventArgs e)
+    {
+        try
+        {
+            Button btn = (Button)sender;
+            var userDetails = ((ListView)sender).SelectedItem as User;
+            if (userDetails != null)
+            {
+                var page = new UserDetailsPage();
+                userDetails.RoleList = getRoleList().Result;
+                page.BindingContext = userDetails;
+                await Navigation.PushAsync(page);
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", ex.Message, "OK");
+            Debug.WriteLine("customlog " + ex.Message);
+        }
+    }
+    protected override bool OnBackButtonPressed()
+    {
+        return true;
     }
 }

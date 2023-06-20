@@ -1,8 +1,12 @@
 ﻿using MAUI_Demo_Service.Data;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace MAUI_Demo.MVVM.ViewModels
+namespace MAUI_Demo.ViewModels
 {
-
     public class BookingsViewModel
     {
         private List<MAUI_Demo_Service.Models.Bookings> bookingItems;
@@ -10,7 +14,7 @@ namespace MAUI_Demo.MVVM.ViewModels
 
 
         public BookingsViewModel()
-        { 
+        {
             //await GetBookingDetails();
             //bookingItems = await bookingService.GetBookingDetailsAsyncFromAPI();
         }

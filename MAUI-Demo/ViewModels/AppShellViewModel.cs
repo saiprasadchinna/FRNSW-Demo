@@ -11,7 +11,7 @@ using MAUI_Demo.Views.Startup;
 using MAUI_Demo.Auth0;
 using MAUI_Demo_Service.Data;
 
-namespace MAUI_Demo.MVVM.ViewModels
+namespace MAUI_Demo.ViewModels
 {
     public class AppShellViewModel : BaseViewModel
     {
@@ -30,8 +30,8 @@ namespace MAUI_Demo.MVVM.ViewModels
             //    Preferences.Remove(nameof(App.UserDetails));
             //}
             //await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
-            OktaSignIn obj = new OktaSignIn();
-            obj.logoutUser();
+            //OktaSignIn obj = new OktaSignIn();
+            //obj.logoutUser();
             //obj.OnLogoutCustomClicked(object sender, EventArgs e);
 
             //var adminDashboardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(DashboardPage)).FirstOrDefault();

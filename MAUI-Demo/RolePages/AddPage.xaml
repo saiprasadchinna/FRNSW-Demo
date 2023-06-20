@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MAUI_Demo.RolePages.AddPage"
+             xmlns:roleModel="clr-namespace:MAUI_Demo_Service.Models;assembly=MAUI-Demo-Service"
              Title="Add Page">
     <VerticalStackLayout>
         <Label x:Name="lblUserName" Text="Please Enter User Name" />
@@ -10,6 +11,19 @@
         <Picker Title="Select a Role" x:Name="rolePicker"
         ItemsSource="{Binding roleList}"
         ItemDisplayBinding="{Binding RoleName}"  />
+        <CollectionView ItemsSource="{Binding roleList}"
+                SelectionMode="Multiple"
+                SelectionChanged="OnCollectionViewSelectionChanged">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="roleModel:Role">
+                    <StackLayout Padding="10">
+                        <Label Text="{Binding RoleId}" FontSize="20" Style="{StaticResource labelGreenStyle}"></Label>
+                        <Label Text="{Binding RoleName}" FontSize="20" Style="{StaticResource labelGreenStyle}"></Label>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
         <Button x:Name="btnSave" Text="Add" Clicked="btnSave_Clicked"  HorizontalOptions="Start" BackgroundColor="Green"/>
     </VerticalStackLayout>
 </ContentPage>

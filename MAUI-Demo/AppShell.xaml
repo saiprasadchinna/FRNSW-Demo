@@ -8,11 +8,6 @@
     Shell.TabBarIsVisible="false"
     xmlns:startupPages="clr-namespace:MAUI_Demo.Views.Startup" NavigationPage.HasBackButton="false">
 
-    <!--<ShellContent FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled"
-        Title="Main Page"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />-->
-
     <ShellContent
         Title="Login Page" FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled"
         ContentTemplate="{DataTemplate startupPages:LoginPage}"

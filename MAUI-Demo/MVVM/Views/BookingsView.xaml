@@ -4,7 +4,8 @@
              x:Class="MAUI_Demo.MVVM.Views.BookingsView"
              xmlns:local="clr-namespace:MAUI_Demo_Service.Models;assembly=MAUI-Demo-Service"
              xmlns:local2="clr-namespace:MAUI_Demo.MVVM.Models"
-             Title="BookingsView">
+             Title="BookingsView"
+             x:Name="currentPage">
 
     <StackLayout>
          
@@ -45,7 +46,16 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Text="Previous" x:Name="BtnPrevious" Clicked="BtnPrevious_Clicked"></Button>
+
+    
+
+        <Button Text="Previous" x:Name="BtnPrevious" Clicked="BtnPrevious_Clicked" ></Button>
         <Button Text="Next" x:Name="BtnNext" Clicked="BtnNext_Clicked"></Button>
+
+        <Button Text="Inline-Previous" x:Name="InlineBtnPrevious"  Clicked="InlineBtnPrevious_Clicked"></Button>
+        <Button Text="Inline-Next" x:Name="InlineBtnNext"   Clicked="InlineBtnNext_Clicked"></Button>
+
+        <Button IsEnabled="{Binding InlineButtonEnabled , Source={x:Reference currentPage} }" x:Name="ButtonOKInline" BackgroundColor="Green" TextColor="White" Text="OK"/>
+
     </StackLayout>
 </ContentPage>

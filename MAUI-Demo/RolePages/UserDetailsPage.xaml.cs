@@ -7,9 +7,13 @@ namespace MAUI_Demo.RolePages;
 public partial class UserDetailsPage : ContentPage
 {
 
+    string selectedRoleIDs;
+
     public UserDetailsPage()
     {
         InitializeComponent();
+        //BindingContext = this;
+        //OnPropertyChanged("SelectedRole");
     }
 
     private void btnSave_Clicked(object sender, EventArgs e)
@@ -19,6 +23,10 @@ public partial class UserDetailsPage : ContentPage
         if (status)
         {
             Navigation.PushAsync(new UserList());
+        }
+        else
+        {
+            DisplayAlert("DB Side Error", "User already exists please give different email Id to add the user", "OK");
         }
     }
 
@@ -36,6 +44,26 @@ public partial class UserDetailsPage : ContentPage
         if (selectedIndex != -1)
         {
             var item = picker.Items[selectedIndex];
+        }
+    }
+
+    private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        var previous = e.PreviousSelection.ToList();
+        var current = e.CurrentSelection;
+        selectedRoleIDs = "";
+        foreach (var item in current)
+        {
+            var roleItem = (Role)item;
+            if (string.IsNullOrEmpty(selectedRoleIDs))
+            {
+                selectedRoleIDs = selectedRoleIDs + Convert.ToString(roleItem.RoleId);
+            }
+            else
+            {
+                if (!selectedRoleIDs.Contains(Convert.ToString(roleItem.RoleId)))
+                    selectedRoleIDs = selectedRoleIDs + "," + Convert.ToString(roleItem.RoleId);
+            }
         }
     }
 }

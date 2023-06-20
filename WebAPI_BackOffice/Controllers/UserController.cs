@@ -54,9 +54,9 @@ namespace WebAPI_BackOffice.Controllers
         }
         [HttpPost("AddPages")]
         [CustomAuthorize]
-        public bool AddPages(string PageName, long RoleId, long PageId)
+        public bool AddPages(string PageName, long RoleId,string RoleList, long PageId)
         {
-            return userDB.savePages(PageName, RoleId, PageId);
+            return userDB.savePages(PageName, RoleId, RoleList, PageId);
         }
     }
 }

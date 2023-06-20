@@ -28,17 +28,7 @@
                 SemanticProperties.Description="Welcome to dot net Multi platform App U I"
                 FontSize="18"
                 HorizontalOptions="Center" />
-            <Button
-                x:Name="GoBackTabbedPage"
-                Text="Go Back TabbedPage"
-                Clicked="GoBackTabbedPage_Clicked"
-                HorizontalOptions="Center" />
-
-            <Button
-                x:Name="BtnOktaLogin"
-                Text="Okta Login Screen"
-                Clicked="BtnOktaLogin_Clicked"
-                HorizontalOptions="Center" />
+           
 
         </VerticalStackLayout>
     </ScrollView>
